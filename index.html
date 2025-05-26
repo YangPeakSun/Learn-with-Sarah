@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học cùng cô giáo Sarah</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="popup-overlay active">
+        <div class="popup-content welcome-popup">
+            <div class="welcome-header">
+                <div class="teacher-avatar">
+                    <img src="images/teacher-sarah-new.png" alt="Cô Sarah" class="teacher-image">
+                </div>
+                <h1>Chào mừng đến với lớp học của cô Sarah! 🌟</h1>
+                <p>Hãy cùng nhau học tập và khám phá những điều thú vị!</p>
+            </div>
+            <button id="startBtn" class="btn-primary">Bắt đầu nào! 🚀</button>
+        </div>
+    </div>
+
+    <!-- Avatar Selection Popup -->
+    <div id="avatarPopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Chọn avatar yêu thích của em nhé! 😊</h2>
+            <div class="avatar-grid">
+                <div class="avatar-option" data-avatar="images/avatar-boy1.png">
+                    <img src="images/avatar-boy1.png" alt="Bé trai 1" class="avatar-image">
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar-boy2.png">
+                    <img src="images/avatar-boy2.png" alt="Bé trai 2" class="avatar-image">
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar-boy3.png">
+                    <img src="images/avatar-boy3.png" alt="Bé trai 3" class="avatar-image">
+                </div>
+                <div class="avatar-option" data-avatar="images/avatar-boy4.png">
+                    <img src="images/avatar-boy4.png" alt="Bé trai 4" class="avatar-image">
+                </div>
+                <div class="avatar-option" data-avatar="🐶">🐶</div>
+                <div class="avatar-option" data-avatar="🐱">🐱</div>
+                <div class="avatar-option" data-avatar="🐰">🐰</div>
+                <div class="avatar-option" data-avatar="🐼">🐼</div>
+                <div class="avatar-option" data-avatar="🦊">🦊</div>
+                <div class="avatar-option" data-avatar="🐸">🐸</div>
+                <div class="avatar-option" data-avatar="🐧">🐧</div>
+                <div class="avatar-option" data-avatar="🦄">🦄</div>
+            </div>
+            <button id="confirmAvatar" class="btn-primary" disabled>Chọn avatar này! ✨</button>
+        </div>
+    </div>
+
+    <!-- Name Input Popup -->
+    <div id="namePopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Hãy cho cô Sarah biết, em tên gì nhé? 💝</h2>
+            <input type="text" id="studentName" placeholder="Nhập tên của em..." maxlength="20">
+            <button id="confirmName" class="btn-primary">Xác nhận 🎈</button>
+        </div>
+    </div>
+
+    <!-- Age Input Popup -->
+    <div id="agePopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Hãy cho cô Sarah biết, em mấy tuổi rồi? 🎂</h2>
+            <select id="studentAge">
+                <option value="">Chọn tuổi của em</option>
+                <option value="6">6 tuổi (Lớp 1)</option>
+                <option value="7">7 tuổi (Lớp 2)</option>
+                <option value="8">8 tuổi (Lớp 3)</option>
+                <option value="9">9 tuổi (Lớp 4)</option>
+                <option value="10">10 tuổi (Lớp 5)</option>
+                <option value="11">11 tuổi (Lớp 6)</option>
+            </select>
+            <button id="confirmAge" class="btn-primary">Hoàn thành! 🌈</button>
+        </div>
+    </div>
+
+    <!-- Grade Selection Popup -->
+    <div id="gradePopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Chọn lớp học của em nhé! 📚</h2>
+            <div class="grade-grid">
+                <div class="grade-option" data-grade="1">
+                    <i class="fas fa-baby"></i>
+                    <span>Lớp 1</span>
+                </div>
+                <div class="grade-option" data-grade="2">
+                    <i class="fas fa-child"></i>
+                    <span>Lớp 2</span>
+                </div>
+                <div class="grade-option" data-grade="3">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Lớp 3</span>
+                </div>
+                <div class="grade-option" data-grade="4">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Lớp 4</span>
+                </div>
+                <div class="grade-option" data-grade="5">
+                    <i class="fas fa-star"></i>
+                    <span>Lớp 5</span>
+                </div>
+            </div>
+            <button id="startQuiz" class="btn-primary" disabled>Bắt đầu làm bài! 🎯</button>
+        </div>
+    </div>
+
+    <!-- Quiz Popup -->
+    <div id="quizPopup" class="popup-overlay">
+        <div class="popup-content quiz-content">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <span id="questionNumber">1</span>/15
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="quiz-score">Điểm: <span id="currentScore">0</span></div>
+            </div>
+            <div id="questionContainer">
+                <h3 id="questionText">Đang tải câu hỏi...</h3>
+                <div id="answersContainer" class="answers-grid"></div>
+            </div>
+            <div class="quiz-actions">
+                <button id="nextQuestion" class="btn-primary" style="display: none;">Câu tiếp theo 👉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Popup -->
+    <div id="resultsPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="results-header">
+                <h2>Kết quả bài làm! 🎉</h2>
+                <div class="final-score">
+                    <span id="finalScore">0</span>/15 câu đúng
+                </div>
+                <div class="points-earned">
+                    Điểm nhận được: <span id="pointsEarned">0</span> 💎
+                </div>
+            </div>
+            <div id="perfectScore" class="perfect-score" style="display: none;">
+                <h3>🎊 Xuất sắc! Làm đúng tất cả! 🎊</h3>
+                <p>Em nhận được phần thưởng đặc biệt!</p>
+                <button id="playMiniGame" class="btn-special">Chơi mini game 🎮</button>
+            </div>
+            <button id="backToHome" class="btn-primary">Về trang chủ 🏠</button>
+        </div>
+    </div>
+
+    <!-- Mini Game Popup -->
+    <div id="miniGamePopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>🎮 Mini Game: Đoán lá cờ! 🏳️</h2>
+            <div id="flagGame">
+                <div class="flag-display">
+                    <span id="flagEmoji">🇻🇳</span>
+                </div>
+                <p id="flagQuestion">Đây là lá cờ của nước nào?</p>
+                <div id="flagAnswers" class="answers-grid"></div>
+            </div>
+            <button id="closeMiniGame" class="btn-primary">Đóng 🚪</button>
+        </div>
+    </div>
+
+    <!-- Assign Accessory Popup -->
+    <div id="assignAccessoryPopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Gắn phụ kiện cho thú cưng nào?</h2>
+            <div id="assignPetList" class="avatar-grid" style="max-height: 250px; overflow-y: auto;">
+                <!-- Pets will be listed here by JavaScript -->
+                <p>Đang tải danh sách thú cưng...</p>
+            </div>
+            <div class="popup-actions" style="margin-top: var(--spacing-lg); display: flex; gap: var(--spacing-md); justify-content: center;">
+                 <button id="confirmAssignAccessory" class="btn-primary">Xác nhận</button>
+                 <button id="cancelAssignAccessory" class="btn-primary" style="background: var(--text-muted);">Bỏ qua</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main App -->
+    <div id="mainApp" class="main-app" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="images/teacher-sarah-new.png" alt="Sarah" class="logo-image">
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Trang chủ</span>
+                </button>
+                <button class="nav-btn" data-section="study">
+                    <i class="fas fa-book"></i>
+                    <span>Học tập</span>
+                </button>
+                 <button class="nav-btn" data-section="collection">
+                    <i class="fas fa-paw"></i>
+                    <span>Bộ sưu tập</span>
+                </button>
+                <button class="nav-btn" data-section="shop">
+                    <i class="fas fa-store"></i>
+                    <span>Cửa hàng</span>
+                </button>
+                <button class="nav-btn" data-section="achievements">
+                    <i class="fas fa-trophy"></i>
+                    <span>Thành tích</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Chúng ta sẽ làm gì hôm nay?</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn" id="settingsBtn">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button class="header-btn" id="chatBtn">
+                            <i class="fas fa-comments"></i>
+                        </button>
+                        <div class="user-profile">
+                            <div class="user-avatar" id="userAvatar">🐶</div>
+                            <div class="user-info">
+                                <span id="userName" class="user-name">Bé yêu</span>
+                                <span id="userPoints" class="user-points">0 điểm 💎</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content-wrapper">
+                <!-- Home Section -->
+                <section id="homeSection" class="content-section active">
+                    <!-- Welcome Card -->
+                    <div class="welcome-card">
+                        <div class="welcome-content">
+                            <div class="welcome-text">
+                                <h2 id="welcomeGreeting">Chào bạn!</h2>
+                                <p>Hôm nay chúng ta sẽ học những gì thú vị nhé?</p>
+                                <div class="quick-actions">
+                                    <button class="quick-action-btn" onclick="switchSection('study')">
+                                        <i class="fas fa-play"></i>
+                                        Bắt đầu học
+                                    </button>
+                                    <button class="quick-action-btn secondary" onclick="switchSection('shop')">
+                                        <i class="fas fa-shopping-bag"></i>
+                                        Cửa hàng
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="welcome-mascot">
+                                <img src="images/teacher-sarah-new.png" alt="Cô Sarah" class="mascot-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Bài đã làm</h3>
+                                <p class="stat-number" id="totalQuizzes">0</p>
+                                <span class="stat-label">bộ đề</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Câu đúng</h3>
+                                <p class="stat-number" id="correctAnswers">0</p>
+                                <span class="stat-label">câu hỏi</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Điểm tích lũy</h3>
+                                <p class="stat-number" id="totalPoints">0</p>
+                                <span class="stat-label">điểm</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>Streak</h3>
+                                <p class="stat-number" id="streak">0</p>
+                                <span class="stat-label">ngày</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Tasks -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Nhiệm vụ hàng ngày</h3>
+                            <div class="progress-indicator">
+                                <span id="completedTasks">0</span>/5
+                            </div>
+                        </div>
+                        <div class="tasks-list">
+                            <div class="task-item" data-task="exercise">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task1">
+                                    <label for="task1"></label>
+                                </div>
+                                <div class="task-icon">🏃‍♂️</div>
+                                <div class="task-info">
+                                    <h4>Tập thể dục</h4>
+                                    <p>Vận động 15 phút</p>
+                                </div>
+                                <div class="task-reward">+10 💎</div>
+                            </div>
+                            <div class="task-item" data-task="help">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task2">
+                                    <label for="task2"></label>
+                                </div>
+                                <div class="task-icon">🧹</div>
+                                <div class="task-info">
+                                    <h4>Phụ mẹ</h4>
+                                    <p>Giúp việc nhà</p>
+                                </div>
+                                <div class="task-reward">+10 💎</div>
+                            </div>
+                            <div class="task-item" data-task="read">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task3">
+                                    <label for="task3"></label>
+                                </div>
+                                <div class="task-icon">📖</div>
+                                <div class="task-info">
+                                    <h4>Đọc sách</h4>
+                                    <p>Đọc 20 phút</p>
+                                </div>
+                                <div class="task-reward">+10 💎</div>
+                            </div>
+                            <div class="task-item" data-task="study">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task4">
+                                    <label for="task4"></label>
+                                </div>
+                                <div class="task-icon">✏️</div>
+                                <div class="task-info">
+                                    <h4>Làm bài tập</h4>
+                                    <p>Hoàn thành 1 bộ đề</p>
+                                </div>
+                                <div class="task-reward">+10 💎</div>
+                            </div>
+                            <div class="task-item" data-task="family">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task5">
+                                    <label for="task5"></label>
+                                </div>
+                                <div class="task-icon">👨‍👩‍👧‍👦</div>
+                                <div class="task-info">
+                                    <h4>Thời gian gia đình</h4>
+                                    <p>Trò chuyện với gia đình</p>
+                                </div>
+                                <div class="task-reward">+10 💎</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pet Section -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Thú cưng của em</h3>
+                            <button class="section-action" onclick="switchSection('shop')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="petDisplay" class="pet-display">
+                            <div class="pet-placeholder">
+                                <i class="fas fa-paw"></i>
+                                <p>Chưa có thú cưng nào<br>Hãy mua từ cửa hàng nhé!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Study Section -->
+                <section id="studySection" class="content-section">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Học tập cùng Sarah</h3>
+                            <div class="daily-limit">
+                                Hôm nay: <span id="dailyQuizCountDisplay">0</span>/3 bộ đề
+                            </div>
+                        </div>
+                        <div class="study-content">
+                            <div class="study-hero">
+                                <div class="study-text">
+                                    <h2>Sẵn sàng học tập chưa?</h2>
+                                    <p>Hãy cùng cô Sarah khám phá những kiến thức mới thú vị!</p>
+                                    <button id="startNewQuiz" class="btn-large">
+                                        <i class="fas fa-play"></i>
+                                        Bắt đầu bộ đề mới
+                                    </button>
+                                </div>
+                                <div class="study-mascot">
+                                    <img src="images/teacher-sarah-new.png" alt="Cô Sarah" class="mascot-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Collection Section -->
+                <section id="collectionSection" class="content-section">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Bộ sưu tập thú cưng của em</h3>
+                        </div>
+                        <div class="collection-grid" id="petCollectionGrid">
+                            <p class="empty-collection-message" style="display: none; text-align: center; color: var(--text-muted);">
+                                Em chưa có thú cưng nào trong bộ sưu tập. Hãy vào cửa hàng để mua nhé!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Shop Section -->
+                <section id="shopSection" class="content-section">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Cửa hàng</h3>
+                            <div class="user-points-display">
+                                <span id="shopPoints">0</span> 💎
+                            </div>
+                        </div>
+                        <div class="shop-categories">
+                            <button class="category-btn active" data-category="pets">Thú cưng</button>
+                            <button class="category-btn" data-category="accessories">Phụ kiện</button>
+                            <button class="category-btn" data-category="food">Thức ăn</button>
+                        </div>
+                        <div class="shop-grid" id="shopGrid">
+                            <!-- Shop items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Achievements Section -->
+                <section id="achievementsSection" class="content-section">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Thành tích của em</h3>
+                        </div>
+                        <div class="achievements-grid" id="achievementsGrid">
+                            <!-- Achievement cards will be populated by JS -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Chat Widget -->
+        <div id="chatWidget" class="chat-widget">
+            <div class="chat-header">
+                <img src="images/teacher-sarah-new.png" alt="Cô Sarah" class="chat-avatar">
+                <span>Cô Sarah</span>
+                <button id="closeChatBtn" class="close-chat">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <img src="images/teacher-sarah-new.png" alt="Cô Sarah" class="message-avatar">
+                    <div class="message-content">
+                        Chào em! Cô Sarah ở đây để giúp em học tập nhé! 😊
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Hỏi cô Sarah...">
+                <button id="sendChatBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Pet Emotion -->
+        <div id="petEmotion" class="pet-emotion">
+            <span id="petEmotionIcon">😊</span>
+        </div>
+    </div>
+
+    <!-- Settings Popup -->
+    <div id="settingsPopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Cài đặt ⚙️</h2>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label>Font chữ:</label>
+                    <select id="fontSelect">
+                        <option value="Inter">Inter</option>
+                        <option value="Baloo 2">Baloo 2</option>
+                        <option value="Comic Neue">Comic Neue</option> <!-- Assuming you'll add Comic Neue font -->
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Kích thước chữ:</label>
+                    <select id="fontSizeSelect">
+                        <option value="normal">Bình thường</option>
+                        <option value="large">To</option>
+                        <option value="extra-large">Rất to</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Màu nền:</label>
+                    <div class="color-options">
+                        <div class="color-option" data-color="default" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div class="color-option" data-color="mint" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                        <div class="color-option" data-color="sunset" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+                        <div class="color-option" data-color="ocean" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>Âm thanh:</label>
+                    <input type="checkbox" id="soundToggle" checked>
+                </div>
+            </div>
+            <button id="logoutBtn" class="btn-primary" style="background: var(--error-color); margin-top: 20px;">Đăng xuất</button>
+            <button id="closeSettings" class="btn-primary" style="margin-top: 10px;">Đóng</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
